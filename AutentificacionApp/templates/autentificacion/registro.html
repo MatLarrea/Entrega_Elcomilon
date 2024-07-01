@@ -1,0 +1,19 @@
+
+{% extends 'layouts/base.html'%}
+
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+    <div style="width: 30%; margin: auto;">
+        <form action="" method="post" style="text-align: center; color: white;">
+            {% csrf_token %} 
+            {{form|crispy}}
+            <input type="submit" class="btn btn-success" value="Resgistrate">
+        </form>
+    </div>
+
+
+{% endblock %}

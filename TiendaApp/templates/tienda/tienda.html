@@ -1,0 +1,43 @@
+{% extends 'layouts/base.html'%}
+
+{% load static %}
+
+
+{% block content %}
+
+<div class="container">
+
+    {% if request.user.is_authenticated %}
+        <div style="float: right;">
+            {% include "carro/widget.html"%}
+        </div>
+    {% else %}
+        <div class="alert alert-danger text-center mx-auto m-2" style="width: 20rem;">
+            <h2>Debe iniciar sesión</h2>
+        </div>
+    {% endif %}
+    <div class="row">
+
+        {% for producto in productos %}
+            <div class="col-md-3">
+                <div class="card" style="width: 100%; margin: 10px 10px;">
+                    <img src="{{producto.imagen.url}}" alt="producto" class="card-img-top">
+    
+                    <div class="card-body text-center">
+                        <h7 class="card-title">{{producto.nombre}}</h7>
+                        <p class="card-text">${{producto.precio}}</p>
+                    </div>
+                    
+                    <div class="card-footer text-center">
+                        <a href="{% url 'ctienda:agregar' producto.id %}" class="btn btn-success">Añadir</a>
+                        
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        
+    </div>
+</div>
+    
+
+{% endblock%}

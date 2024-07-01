@@ -1,0 +1,57 @@
+{% extends 'layouts/base.html'%}
+
+{% load static %}h6
+{% block content %}
+    
+    <section id="inicio" style="float: right;">
+        <h5 style="color: white;">Si quieres saber el clima:</h5>
+        <div class="clima" style="color: white;"> 
+            <input type="text" placeholder="Ingrese la Ciudad" id="city" value="">
+            <button id="btn" class="btn btn-success"><h6>Mostrar Temperatura</h6></button>
+            <div id="resultado" style="color: black;"></div>
+        </div>
+    </section>
+    {% for post in posts %}
+        <section class="page-section clearfix">
+            <div class="container">
+                <div class="intro">
+                    <img class="intro-img img-fluid mb-3 mb-lg-0 rounded"
+                        src="{{post.imagen.url}}" alt="" style="width: 50%;">
+                    <div class="intro-text left-0 text-center bg-faded p-5 rounded">
+                        <h2 class="section-heading mb-4">
+                            <span class="section-heading-lower">{{post.titulo}}</span>
+                            <span class="section-heading-upper">{{post.contenido}}</span>
+                        </h2>
+                        
+                        <div style="text-align: left; font-size: 0.8em;">
+                                Autor: {{post.autor}}
+                                Categorias:
+                                                
+                                                {% for post in posts%}
+                                                    {% for categoria in post.categoria.all %}
+                                                        {{categoria.nombre}}
+                                                    {% endfor%}
+                                                {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    {% endfor %}
+    
+
+  
+    <section>
+        <div style="width: 75%; margin: auto; text-align: center; color: white;">
+            
+            Categorias: 
+            
+            {% for post in posts %} 
+                {% for categoria in post.categoria.all %}    
+                   <a href="{% url 'categoria' categoria.id %}" class="linksCategorias"> {{categoria.nombre}}</a> 
+                {% endfor %}
+            {% endfor %}    
+
+        </div>
+    </section>
+{% endblock%}

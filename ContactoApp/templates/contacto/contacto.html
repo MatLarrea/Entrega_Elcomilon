@@ -1,0 +1,22 @@
+{% extends 'layouts/base.html'%}
+
+{% load static %}
+
+{% block content %}
+    <div class="formularioContacto">
+        <form action="" method="POST" style="text-align: center;">
+            {% csrf_token %} 
+            <table style="margin:20px auto; color: white;">
+                {{miFormulario.as_table}}
+            </table>
+            <input type="submit" value="Enviar" style="width: 150px;">
+            {% if "Datos enviados" in request.GET %}
+                <p style="color: white;">
+                    Datos Enviados
+                </p>
+            {% endif %}
+        </form>
+        
+    </div>
+<!--<p style="color: white;">{{request.POST}}</p>-->
+{% endblock%}
