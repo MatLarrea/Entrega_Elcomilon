@@ -1,7 +1,7 @@
 from django.db import models
 
 # Create your models here.
-class Categoria_producto(models.Model):
+class Categoriaproducto(models.Model):
     nombre = models.CharField(max_length=100, unique=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now_add=True)

@@ -1,0 +1,30 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="formularioContacto" style="text-align: center;">
+    <h1 style="color: white;">Agregar Producto</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <table style="margin:20px auto; color: white;">
+            {{ form.as_table }}
+        </table>
+        <button type="submit" style="display: block; margin: 0 auto;">Guardar Producto</button>
+    </form>
+</div>
+
+<div class="formularioContacto" style="margin-top: 50px; text-align: center;">
+    <h2 style="color: white;">Lista de Productos</h2>
+    <ul style="list-style-type: none; padding: 0;">
+        {% for producto in productos %}
+        <li style="margin-bottom: 10px;">
+            {{ producto.nombre }} - Precio: {{ producto.precio }}
+            <form method="post" action="{% url 'borrar_producto' producto.id %}">
+                {% csrf_token %}
+                <button type="submit">Eliminar</button>
+            </form>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

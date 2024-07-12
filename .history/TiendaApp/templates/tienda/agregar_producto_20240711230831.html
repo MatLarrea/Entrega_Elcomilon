@@ -1,0 +1,37 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="formularioContacto" style="text-align: center;">
+    <h1 style="color: white;">Agregar Producto</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <table style="margin:20px auto; color: white;">
+            {{ form.as_table }}
+        </table>
+        <input type="submit" value="Guardar producto" style="width: 150px;">
+    </form>
+</div>
+
+<div class="formularioContacto" style="margin-top: 50px; text-align: center;">
+    <h2 style="color: white;">Lista de Productos</h2>
+    <ul style="list-style-type: none; padding: 0;">
+        {% for producto in productos %}
+        <li style="margin-bottom: 20px; display: flex; align-items: center;">
+            {% if producto.imagen %}
+            <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}" style="max-width: 100px; margin-right: 20px;">
+            {% else %}
+            <span style="width: 100px; height: 100px; background-color: lightgray; display: inline-block; margin-right: 20px;"></span>
+            {% endif %}
+            <span>{{ producto.nombre }}</span>
+            <form method="post" action="{% url 'borrar_producto' producto.id %}" style="margin-left: auto;">
+                {% csrf_token %}
+                <input type="submit" value="Eliminar" style="width: 150px;">
+            </form>
+        </li>
+        {% empty %}
+        <li style="color: white;">No hay productos disponibles.</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

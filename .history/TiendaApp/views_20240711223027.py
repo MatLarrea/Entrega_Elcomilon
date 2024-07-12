@@ -40,21 +40,18 @@ def agregar_producto(request):
         form = ProductoForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('agregar_producto')
+            # Redirige a alguna vista o URL después de guardar el producto
+            return redirect('nombre_de_tu_vista_o_url')
     else:
         form = ProductoForm()
     
-    productos = Producto.objects.all()
-    context = {
-        'form': form,
-        'productos': productos,
-    }
-    return render(request, 'tienda/agregar_producto.html', context)
+    return render(request, 'tienda/agregar_producto.html', {'form': form})
 
 def borrar_producto(request, producto_id):
     producto = get_object_or_404(Producto, id=producto_id)
     if request.method == 'POST':
         producto.delete()
-        return redirect('agregar_producto')
+        # Redirige a alguna vista o URL después de borrar el producto
+        return redirect('nombre_de_tu_vista_o_url')
     
-    return render(request, 'tienda/agregar_producto.html', {'producto': producto})
+    return render(request, 'tienda/borrar_producto.html', {'producto': producto})

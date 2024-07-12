@@ -1,0 +1,40 @@
+{% extends 'layouts/base.html'%}
+
+{% load static %}
+
+
+{% block content %}
+{% if user.is_superuser %}
+<div class="formularioContacto" style="text-align: center;">
+    <h1 style="color: white;">Agregar Categoría</h1>
+    <form method="post">
+        {% csrf_token %}
+        <table style="margin:20px auto; color: white;">
+        {{ form.as_table }}
+        </table>
+        <input type="submit" value="Guardar Categoría" style="width: 150px;">
+    </form>
+</div>
+<div class="formularioContacto" style="text-align: center;">
+    <h2 style="color: white; margin-top: 30px;">Listado de Categorías</h2>
+    <ul style="list-style-type: none; padding: 0;">
+        {% for categoria in categorias %}
+        <li style="margin-bottom: 10px;">
+            {{ categoria.nombre }}
+            <form method="post" action="{% url 'borrar_categoria' categoria.id %}" style="display: inline;">
+                {% csrf_token %}
+                <input type="submit" value="Eliminar" style="width: 150px; margin-right: 30px;">
+            </form>
+        </li>
+        {% empty %}
+        <li style="color: white;">No hay categorías disponibles.</li>
+        {% endfor %}
+    </ul>
+</div>
+{% else %}
+<div class="formularioContacto">
+    <H4 style="text-align: center; color: white;">NO TIENES PERMISOS PARA AGREGAR CATEGORÍAS.</H4>
+</div>
+{% endif %}
+
+{% endblock%}

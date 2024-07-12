@@ -44,7 +44,7 @@ def agregar_producto(request):
     else:
         form = ProductoForm()
     
-    productos = Producto.objects.all()
+    productos = Producto.objects.name()
     context = {
         'form': form,
         'productos': productos,

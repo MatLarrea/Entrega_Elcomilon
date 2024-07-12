@@ -59,11 +59,8 @@
                         <a class="nav-link text-uppercase text-expanded" href="{% url 'blog' %}">Blog</a>
                     </li>
                     {% if user.is_superuser %}
-                        <li class="nav-item {% if request.path == '/agregar_categoria/' %}active{% endif %} px-lg-4">
-                            <a class="nav-link text-uppercase text-expanded" href="{% url 'agregar_categoria' %}">Administracion Categorias</a>
-                        </li>
-                        <li class="nav-item {% if request.path == '/agregar_producto/' %}active{% endif %} px-lg-4">
-                            <a class="nav-link text-uppercase text-expanded" href="{% url 'agregar_producto' %}">Administracion Productos</a>
+                        <li class="nav-item {% if request.path|slice:':6' == '/tienda/' %}active{% endif %} px-lg-4">
+                            <a class="nav-link text-uppercase text-expanded" href="{% url 'C:\Entrega_Elcomilon\TiendaApp\templates\tienda\agregar_categoria.html' %}">Administración</a>
                         </li>
                     {% endif %}
                 </ul>
