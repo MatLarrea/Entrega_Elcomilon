@@ -1,7 +1,6 @@
 
 
 <table class="table table-bordered" style="color: white; margin-top: 1rem; margin-left: 2rem;">
-    
     <thead >
         <tr>
             <th colspan="3" class="text-center">
@@ -42,11 +41,20 @@
             {% endif %}
 
             <tfoot>
+                
                 <tr>
                     <td colspan="3">
                         Total: ${{importe_total_carro}}
                     </td>
                 </tr>
+                
+                {% if request.session.carrito.items %}
+                    <tr>
+                        <td colspan="3" style="text-align: center;">
+                            <a href="../pedidos" class="btn btn-success">Confirmar pedido</a>
+                        </td>
+                    </tr>
+                {% endif %}
             </tfoot>
 
 

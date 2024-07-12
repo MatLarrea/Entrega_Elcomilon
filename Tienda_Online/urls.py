@@ -28,6 +28,8 @@ urlpatterns = [
     path('tienda/', include("TiendaApp.urls")),
     path('carrito/', include("Carrito.urls")),
     path('auth/', include("AutentificacionApp.urls")),
+    path('pedidos/', include("GestionPedidosApp.urls")),
+    
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
