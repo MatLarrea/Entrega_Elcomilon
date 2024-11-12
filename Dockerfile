@@ -1,25 +1,17 @@
-#Use the official Python image from the Docker Hub
-FROM python:3.10-slim
+# Usa una imagen base de Python
+FROM python:3.11
 
-
-#Set environment variables
-ENV PYTHONDONTWRITEBYTECODE=1
-ENV PYTHONUNBUFFERED=1
-
-#Set the working directory
+# Establece el directorio de trabajo en /app
 WORKDIR /app
 
-#Copy the requirements file and install dependencies
-RUN pip install Django
+# Copia el archivo requirements.txt en el directorio de trabajo
+COPY requirements.txt .
 
-#Copy the rest of the project files
+# Instala las dependencias
+RUN pip install -r requirements.txt
+
+# Copia el resto de los archivos del proyecto en el directorio de trabajo
 COPY . .
 
-#Collect static files (optional step, useful in production)
-RUN python manage.py migrate
-
-#Expose port 8000 to access Django’s dev server
-EXPOSE 8000
-
-#Run the Django development server
+# Comando para ejecutar la aplicación
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
